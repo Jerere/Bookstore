@@ -1,12 +1,23 @@
 package hh.palvelinohjelmointi.bookstore.model;
 
-public class Book {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-	String title;
-	String author;
-	int year;
-	String isbn;
-	double price;
+@Entity
+public class Book {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	private String title;
+	private String author;
+	private int year;
+	private String isbn;
+	private double price;
+
+	public Book() {
+	}
 
 	public Book(String title, String author, int year, String isbn, double price) {
 		super();
@@ -15,6 +26,14 @@ public class Book {
 		this.year = year;
 		this.isbn = isbn;
 		this.price = price;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -49,18 +68,17 @@ public class Book {
 		this.isbn = isbn;
 	}
 
-	public double getprice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setprice(double price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
 	@Override
 	public String toString() {
-		return "Book [title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn + ", price=" + price
-				+ "]";
+		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn
+				+ ", price=" + price + "]";
 	}
-
 }
