@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import hh.palvelinohjelmointi.bookstore.model.Book;
 import hh.palvelinohjelmointi.bookstore.model.BookRepository;
+import hh.palvelinohjelmointi.bookstore.model.Gategory;
+import hh.palvelinohjelmointi.bookstore.model.GategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -19,11 +21,16 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository bookRepository) {
+	public CommandLineRunner bookDemo(BookRepository bookRepository, GategoryRepository gategoryRepository) {
 		return (args) -> {
 			log.info("Save a couple of books :)");
-			bookRepository.save(new Book("Tieto Kirja", "Jussi Pekka", 2017, "978-3-43-23432-0", 20.99));
-			bookRepository.save(new Book("Keitto Opas", "Perttu perä", 2012, "978-2-12-14554-0", 12.34));
+			gategoryRepository.save(new Gategory("Tietokirjat"));
+			gategoryRepository.save(new Gategory("Keittokirjat"));
+			gategoryRepository.save(new Gategory("Kaunokirjat"));
+			
+			bookRepository.save(new Book("Tiedon ABC", "Jussi Pekka", 2017, "978-3-43-23432-0", 20.99, gategoryRepository.findByName("Tietokirjat").get(0)));
+			bookRepository.save(new Book("Keitto Opas", "Perttu Pehmo", 2012, "978-2-12-14554-0", 12.34, gategoryRepository.findByName("Keittokirjat").get(0)));
+			bookRepository.save(new Book("Santerin seikkailut", "Keijo Kelaperä", 1997, "978-2-14-14434-0", 19.99, gategoryRepository.findByName("Kaunokirjat").get(0)));
 
 			log.info("fetch all books:");
 			for (Book book : bookRepository.findAll()) {
