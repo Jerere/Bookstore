@@ -1,11 +1,15 @@
 package hh.palvelinohjelmointi.bookstore.web;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.palvelinohjelmointi.bookstore.model.Book;
 import hh.palvelinohjelmointi.bookstore.model.BookRepository;
@@ -17,10 +21,21 @@ public class BookController {
 	@Autowired
 	private BookRepository bookRepository;
 	@Autowired
-	private BookRepository drepository;
-	@Autowired 
 	private GategoryRepository gategoryrepository;
 
+	// FIND ALL BOOKS (REST)
+	@RequestMapping("/books")
+	public @ResponseBody List<Book> findBookRest() {
+		return (List<Book>) bookRepository.findAll();
+	}
+
+	// FIND BOOK WITH ID (REST)
+	@RequestMapping("/books/{id}")
+	public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {
+		return bookRepository.findById(bookId);
+	}
+
+	// SHOW BOOK LIST
 	@RequestMapping(value = "/booklist", method = RequestMethod.GET)
 	public String bookStoreController(Model model) {
 		model.addAttribute("books", bookRepository.findAll());
@@ -53,7 +68,6 @@ public class BookController {
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("book", bookRepository.findById(bookId));
-		model.addAttribute("departsments", drepository.findAll());
 		model.addAttribute("gategories", gategoryrepository.findAll());
 		return "editbook";
 	}

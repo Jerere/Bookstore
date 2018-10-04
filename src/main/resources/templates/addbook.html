@@ -10,27 +10,27 @@
 		<h1 style="margin: 30px" >Add Book</h1>
 		<form class="form-row; col-sm-3 my-1" th:object="${book}" th:action="@{save}" action="#" method="post">
 		  	
-		  	<label class="col-sm-3 col-form-label">Title</label>
+		  	<label class="col-sm-4 col-form-label">Title</label>
 			<input class="col-7" type="text" id="title" th:field="*{title}" />
 			<div style="display: block; height: 10px;"></div>
 			
-		  	<label class="col-sm-3 col-form-label">Author</label>
+		  	<label class="col-sm-4 col-form-label">Author</label>
 			<input class="col-7" type="text" id="author" th:field="*{author}" />
 			<div style="display: block; height: 10px;"></div>
 		  	
-		  	<label class="col-sm-3 col-form-label">Year</label>
+		  	<label class="col-sm-4 col-form-label">Year</label>
 			<input class="col-7" type="text" id="year" th:field="*{year}" />
 			<div style="display: block; height: 10px;"></div>
 			
-			<label class="col-sm-3 col-form-label">ISBN</label>
+			<label class="col-sm-4 col-form-label">ISBN</label>
 			<input class="col-7" type="text" id="isbn" th:field="*{isbn}" />
 			<div style="display: block; height: 10px;"></div>
 			
-			<label class="col-sm-3 col-form-label">Price</label>
+			<label class="col-sm-4 col-form-label">Price</label>
 			<input class="col-7" type="text" id="price" th:field="*{price}" />
 			<div style="display: block; height: 10px;"></div>
 			
-			<label class="col-sm-3 col-form-label" for="gatlist">Gategory</label>
+			<label class="col-sm-4 col-form-label" for="gatlist">Gategory</label>
 			<select id="deplist" th:field="*{gategory}" class= "form-controll">
 				<option th:each="gategory:${gategories}"
 						th:value="${gategory.gategoryid}"
