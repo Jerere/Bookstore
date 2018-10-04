@@ -22,6 +22,12 @@ public class BookController {
 	private BookRepository bookRepository;
 	@Autowired
 	private GategoryRepository gategoryrepository;
+	
+	// LOG IN 
+	@RequestMapping(value="/login")
+	public String login() {
+		return "login";
+	}
 
 	// FIND ALL BOOKS (REST)
 	@RequestMapping("/books")
